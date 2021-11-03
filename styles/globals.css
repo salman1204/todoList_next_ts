@@ -1,8 +1,16 @@
 * {
   font-family: Montserrat;
   box-sizing: border-box;
+  
 }
 
 .icon__background {
   background-color: #2F2A2F;
+}
+
+.todo__card__main {
+  background-color: #FF9B73;
+  border-radius: 10px;
+  width: 380px;
+  min-height: 286px;
 }

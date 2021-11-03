@@ -3,7 +3,7 @@ import { AiFillStar, AiOutlinePlus } from 'react-icons/ai'
 
 const Sidebar = () => {
   return (
-    <div className="flex-column border-end min-vh-100">
+    <div className="flex-column border-end min-vh-100 p-0">
       <div className="d-flex justify-content-center pt-4"><h6> <b>NOTEBOOK</b> </h6></div>
       <div className="d-flex justify-content-center">
         <IconContext.Provider value={{ color: '#FECD03', size: '25px' }}>
