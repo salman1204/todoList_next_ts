@@ -1,12 +1,9 @@
 import { Col, Row } from 'react-bootstrap'
-import todoList from './../data.json'
 import TodoItem from './TodoItem'
 
-export interface Props {
-  item: object
-}
-
 const TodoLists = () => {
+  let todoList:[] = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('list')) : null
+  
   return (
     <div className="p-5">
       <Row>
@@ -15,8 +12,8 @@ const TodoLists = () => {
       <Row>
         <Col>
           <div className="d-flex flex-wrap justify-content-start">
-            {todoList.map((item) => (
-              <TodoItem key={item.id} item={item} />
+            {todoList != null && todoList.map((item) => (
+              <TodoItem key={Math.floor(Math.random() * 1000)} item={item} />
             ))}
           </div>
         </Col>
