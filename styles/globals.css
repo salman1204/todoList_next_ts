@@ -6,6 +6,7 @@
 
 .icon__background {
   background-color: #2F2A2F;
+  cursor: pointer;
 }
 
 .todo__card__main {
