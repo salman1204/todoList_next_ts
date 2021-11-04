@@ -12,9 +12,6 @@ const Template = () => {
         </Col>
         <Col>
           <Row>
-            <Header />
-          </Row>
-          <Row>
             <TodoLists />
           </Row>
         </Col>
