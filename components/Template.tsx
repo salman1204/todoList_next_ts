@@ -10,7 +10,7 @@ const Template = () => {
           <Sidebar />
         </Col>
         <Col>
-          <Row>
+          <Row >
             <TodoLists />
           </Row>
         </Col>

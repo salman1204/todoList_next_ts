@@ -10,6 +10,7 @@ type TodoItems = {
 }
 
 const TodoItem = ({item} : TodoItems) => {
+
   return (
     <div className="todo__card__main  mt-3 p-3 me-2 position-relative ">
       <div className="d-flex justify-content-between mb-2">
@@ -43,6 +44,8 @@ const TodoItem = ({item} : TodoItems) => {
         </div>
       </div>
     </div>
+
+  
   )
 }
 
