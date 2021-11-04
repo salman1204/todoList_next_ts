@@ -1,5 +1,4 @@
 import { Col, Container, Row } from 'react-bootstrap'
-import Header from './Header'
 import Sidebar from './Sidebar'
 import TodoLists from './TodoLists'
 

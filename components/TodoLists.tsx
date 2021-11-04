@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Form, FormControl, Row } from 'react-bootstrap'
 import TodoItem from './TodoItem'
-import { Form, FormControl } from 'react-bootstrap'
 
 type data = {
   title: string
@@ -28,7 +27,7 @@ const TodoLists = () => {
           <FormControl
             placeholder="Search with title"
             type="text"
-            onChange={e => setSearchText(e.target.value)}
+            onChange={(e) => setSearchText(e.target.value)}
           />
         </Form>
       </Row>

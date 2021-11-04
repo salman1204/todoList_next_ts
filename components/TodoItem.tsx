@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { IconContext } from 'react-icons'
 import { AiFillStar, AiOutlineDelete } from 'react-icons/ai'
 import { VscEdit } from 'react-icons/vsc'
@@ -27,7 +26,7 @@ const TodoItem = ({item} : TodoItems) => {
       <div className="position-absolute display-inline-flex bottom-0 mb-2 w-100">
         <div className="d-flex justify-content-between">
           <div>
-            <p>{item.title}</p>
+            Jan 21, 2002
           </div>
           <div className="pe-4">
             <IconContext.Provider value={{ size: '25px' }}>

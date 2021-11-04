@@ -1,3 +1,4 @@
+import Router from 'next/router'
 import { useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 
@@ -24,18 +25,20 @@ const TodoForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    let a = []
-    a = JSON.parse(localStorage.getItem('list')) || []
-    a.push(values)
-    localStorage.setItem('list', JSON.stringify(a))
+    let formData = []
+    formData = JSON.parse(localStorage.getItem('list')) || []
+    formData.push(values)
+    localStorage.setItem('list', JSON.stringify(formData))
+    Router.push('/')
   }
 
   return (
-    <div>
-      <Form>
+    <div className="min-vh-100 d-flex row align-items-center justify-content-center m-0 p-0">
+      <Form className="w-50" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Enter Title</Form.Label>
           <Form.Control
+            required
             type="text"
             name="title"
             placeholder="Enter Title"
@@ -44,22 +47,21 @@ const TodoForm = () => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Example textarea</Form.Label>
+          <Form.Label>Description</Form.Label>
           <Form.Control
+            required
             as="textarea"
             name="description"
             rows={3}
+            placeholder="Write Description"
             onChange={handleForm}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
+          <Form.Check type="checkbox" label="Make this note star" />
         </Form.Group>
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
-          Submit
-        </Button>
         <Button variant="primary" type="submit">
-          Test
+          Submit
         </Button>
       </Form>
     </div>
