@@ -1,13 +1,12 @@
-import Link from 'next/link'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { IconContext } from 'react-icons'
 import { AiFillStar, AiOutlinePlus } from 'react-icons/ai'
-import TodoForm from './TodoForm'
-import TodoItem from './TodoItem'
+import { modalContext } from '../context/ContextProvider'
 
 const Sidebar = () => {
-  const [modalOpen, setModalOpen] = useState(false)
-
+  const { modal, handleModal } = useContext(modalContext)
+  
+  
   return (
     <div className="flex-column border-end min-vh-100 p-0 m-0">
       <div className="d-flex justify-content-center pt-4">
@@ -25,14 +24,12 @@ const Sidebar = () => {
       </div>
       <div className="d-flex justify-content-center">
         <IconContext.Provider value={{ color: '#FFF', size: '25px' }}>
-            <div
-              className="mt-3 p-2 d-inline-block rounded-circle icon__background"
-              onClick={() => {
-                setModalOpen(true)
-              }}
-            >
-              <AiOutlinePlus />
-            </div>
+          <div
+            className="mt-3 p-2 d-inline-block rounded-circle icon__background"
+            onClick={handleModal}
+          >
+            <AiOutlinePlus />
+          </div>
         </IconContext.Provider>
       </div>
     </div>
