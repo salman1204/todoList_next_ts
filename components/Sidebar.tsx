@@ -1,11 +1,12 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { IconContext } from 'react-icons'
 import { AiFillStar, AiOutlinePlus } from 'react-icons/ai'
 import { modalContext } from '../context/ContextProvider'
+import {starContext} from '../context/StarListProvider'
 
 const Sidebar = () => {
-  const { modal, handleModal } = useContext(modalContext)
-  
+  const { handleModal } = useContext(modalContext)
+  const { handleStar } = useContext(starContext)
   
   return (
     <div className="flex-column p-0 m-0">
@@ -17,7 +18,7 @@ const Sidebar = () => {
       </div>
       <div className="d-flex justify-content-center">
         <IconContext.Provider value={{ color: '#FECD03', size: '25px' }}>
-          <div className="mt-4 p-2 d-inline-block rounded-circle icon__background">
+          <div className="mt-4 p-2 d-inline-block rounded-circle icon__background" onClick={handleStar}>
             <AiFillStar />
           </div>
         </IconContext.Provider>
