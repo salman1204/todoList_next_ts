@@ -7,6 +7,7 @@ import { modalContext } from '../context/ContextProvider'
 interface initialValues {
   title: string
   description: string
+  hasStar: boolean
 }
 
 const customStyles = {
@@ -22,7 +23,13 @@ const customStyles = {
 }
 
 const TodoForm = () => {
-  const [values, setValues] = useState<initialValues | null>(null)
+  const [values, setValues] = useState<initialValues>({
+    title: '',
+    description: '',
+    hasStar: false,
+  })
+  const [hasStar, setHasStar] = useState<boolean>()
+
   const { handleModal } = useContext(modalContext)
 
   useEffect(() => {
@@ -80,11 +87,20 @@ const TodoForm = () => {
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Make this note star" />
+            <Form.Check
+              type="checkbox"
+              label="Make this note star"
+              name="hasStar"
+              checked={hasStar}
+              onChange={()=> {values.hasStar = !hasStar}}
+            />
           </Form.Group>
           <div className="d-flex justify-content-between py-3">
             <div>
-            <div className="color border" style={{ backgroundColor: '#FFFFFF'}}>
+              <div
+                className="color border"
+                style={{ backgroundColor: '#FFFFFF' }}
+              >
                 <input
                   type="radio"
                   name="color"
