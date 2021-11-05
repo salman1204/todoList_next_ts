@@ -13,7 +13,7 @@ const customStyles = {
   content: {
     top: '50%',
     left: '50%',
-    right: '70%',
+    right: '50%',
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
@@ -50,7 +50,7 @@ const TodoForm = () => {
   return (
     <Modal isOpen={true} onRequestClose={handleModal} style={customStyles}>
       <div className=" d-flex row align-items-center justify-content-center m-0 p-0">
-        <div className="d-flex justify-content-between mb-3">
+        <div className="d-flex justify-content-between mb-5 pt-3">
           <span></span>
           <span>New Note</span>
           <AiOutlineClose onClick={handleModal} style={{ cursor: 'pointer' }} />
@@ -80,7 +80,55 @@ const TodoForm = () => {
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Make this note star" />
           </Form.Group>
-          
+        <div className="color">
+          <input
+            type="radio"
+            id="html"
+            name="color"
+            value="#FFFFFF"
+            onChange={handleForm}
+            className="p-3 "
+          />
+
+          <input
+            type="radio"
+            id="css"
+            name="color"
+            value="#01D4FF"
+            onChange={handleForm}
+          />
+
+          <input
+            type="radio"
+            id="javascript"
+            name="color"
+            value="#FF9B73"
+            onChange={handleForm}
+          />
+           <input
+            type="radio"
+            id="html"
+            name="color"
+            value="#B692FE"
+            onChange={handleForm}
+          />
+
+          <input
+            type="radio"
+            id="css"
+            name="color"
+            value="#E4EE90"
+            onChange={handleForm}
+          />
+
+          <input
+            type="radio"
+            id="javascript"
+            name="color"
+            value="#FFC971"
+            onChange={handleForm}
+          />
+          </div>
           <Button variant="dark" type="submit">
             save
           </Button>

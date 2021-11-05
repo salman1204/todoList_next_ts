@@ -17,3 +17,23 @@
   min-height: 286px;
 }
 
+ /* Radio button */
+ .color input[type="radio"] {
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: middle;
+  background: #252525;
+  border: 1px solid #d2d2d2;
+  border-radius: 100%;
+  accent-color: red; 
+}
+
+.color input[type="radio"] + div:hover {
+   border-color: #c2c2c2;
+}
+
+.color input[type="radio"]:checked  {
+   background:gray;
+}

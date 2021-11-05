@@ -6,13 +6,13 @@ type TodoItems = {
   item: {
     title: string,
     description: string,
+    color: string
   }
 }
 
 const TodoItem = ({item} : TodoItems) => {
-  const col = "#FF9B73"
   return (
-    <div className="todo__card__main  mt-3 p-3 me-2 position-relative " style={{backgroundColor: `${col}`}}>
+    <div className="todo__card__main  mt-3 p-3 me-2 position-relative " style={{backgroundColor: `${item.color}`}}>
       <div className="d-flex justify-content-between mb-2">
         <h5>
           <b>{item.title}</b>
