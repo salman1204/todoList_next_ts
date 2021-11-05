@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { AiOutlineClose } from 'react-icons/ai'
 import Modal from 'react-modal'
-import { modalContext } from '../context/ContextProvider'
+import { modalContext } from '../context/ModalProvider'
 
 interface initialValues {
   title: string
@@ -28,7 +28,7 @@ const TodoForm = () => {
     description: '',
     hasStar: false,
   })
-  const [hasStar, setHasStar] = useState<boolean>()
+  const [hasStar] = useState<boolean>()
 
   const { handleModal } = useContext(modalContext)
 
@@ -43,8 +43,6 @@ const TodoForm = () => {
       ...values,
       [name]: value,
     })
-
-    console.log(values)
   }
 
   const handleSubmit = (e) => {

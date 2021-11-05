@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { IconContext } from 'react-icons'
 import { AiFillStar, AiOutlinePlus } from 'react-icons/ai'
-import { modalContext } from '../context/ContextProvider'
+import { modalContext } from '../context/ModalProvider'
 import {starContext} from '../context/StarListProvider'
 
 const Sidebar = () => {

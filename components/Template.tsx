@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { Col, Row } from 'react-bootstrap'
-import { modalContext } from '../context/ContextProvider'
+import { modalContext } from '../context/ModalProvider'
 import Sidebar from './Sidebar'
 import TodoForm from './TodoForm'
 import TodoLists from './TodoLists'
