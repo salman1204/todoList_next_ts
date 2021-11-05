@@ -36,6 +36,8 @@ const TodoForm = () => {
       ...values,
       [name]: value,
     })
+
+    console.log(values)
   }
 
   const handleSubmit = (e) => {
@@ -49,7 +51,7 @@ const TodoForm = () => {
 
   return (
     <Modal isOpen={true} onRequestClose={handleModal} style={customStyles}>
-      <div className=" d-flex row align-items-center justify-content-center m-0 p-0">
+      <div className=" d-flex row align-items-center justify-content-center m-0">
         <div className="d-flex justify-content-between mb-5 pt-3">
           <span></span>
           <span>New Note</span>
@@ -80,58 +82,72 @@ const TodoForm = () => {
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Make this note star" />
           </Form.Group>
-        <div className="color">
-          <input
-            type="radio"
-            id="html"
-            name="color"
-            value="#FFFFFF"
-            onChange={handleForm}
-            className="p-3 "
-          />
+          <div className="d-flex justify-content-between py-3">
+            <div>
+            <div className="color border" style={{ backgroundColor: '#FFFFFF'}}>
+                <input
+                  type="radio"
+                  name="color"
+                  value="#FFFFFF"
+                  onChange={handleForm}
+                />
+                <i className="checkbox-icon"></i>
+              </div>
+              <div className="color" style={{ backgroundColor: '#01D4FF' }}>
+                <input
+                  type="radio"
+                  name="color"
+                  value="#01D4FF"
+                  onChange={handleForm}
+                />
+                <i className="checkbox-icon"></i>
+              </div>
 
-          <input
-            type="radio"
-            id="css"
-            name="color"
-            value="#01D4FF"
-            onChange={handleForm}
-          />
+              <div className="color" style={{ backgroundColor: '#FF9B73' }}>
+                <input
+                  type="radio"
+                  name="color"
+                  value="#FF9B73"
+                  onChange={handleForm}
+                />
+                <i className="checkbox-icon"></i>
+              </div>
 
-          <input
-            type="radio"
-            id="javascript"
-            name="color"
-            value="#FF9B73"
-            onChange={handleForm}
-          />
-           <input
-            type="radio"
-            id="html"
-            name="color"
-            value="#B692FE"
-            onChange={handleForm}
-          />
+              <div className="color" style={{ backgroundColor: '#B692FE' }}>
+                <input
+                  type="radio"
+                  name="color"
+                  value="#B692FE"
+                  onChange={handleForm}
+                />
+                <i className="checkbox-icon"></i>
+              </div>
 
-          <input
-            type="radio"
-            id="css"
-            name="color"
-            value="#E4EE90"
-            onChange={handleForm}
-          />
+              <div className="color" style={{ backgroundColor: '#E4EE90' }}>
+                <input
+                  type="radio"
+                  name="color"
+                  value="#E4EE90"
+                  onChange={handleForm}
+                />
+                <i className="checkbox-icon"></i>
+              </div>
 
-          <input
-            type="radio"
-            id="javascript"
-            name="color"
-            value="#FFC971"
-            onChange={handleForm}
-          />
+              <div className="color" style={{ backgroundColor: '#FFC971' }}>
+                <input
+                  type="radio"
+                  name="color"
+                  value="#FFC971"
+                  onChange={handleForm}
+                />
+                <i className="checkbox-icon"></i>
+              </div>
+            </div>
+
+            <Button variant="dark" type="submit">
+              save
+            </Button>
           </div>
-          <Button variant="dark" type="submit">
-            save
-          </Button>
         </Form>
       </div>
     </Modal>

@@ -17,23 +17,50 @@
   min-height: 286px;
 }
 
- /* Radio button */
- .color input[type="radio"] {
-  height: 20px;
-  width: 20px;
+ /* Radio Color button */
+
+.color,
+.color input {
+  position: relative;
+  overflow: hidden;
+  
+  width: 35px;
+  height: 35px;
+  
+  border-radius: 50%;
+}
+
+.color {
   display: inline-block;
+  margin: 3px;
+}
+
+.color input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  opacity: 0;
+  z-index: 2;
   cursor: pointer;
-  vertical-align: middle;
-  background: #252525;
-  border: 1px solid #d2d2d2;
-  border-radius: 100%;
-  accent-color: red; 
 }
 
-.color input[type="radio"] + div:hover {
-   border-color: #c2c2c2;
+.color i {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  background-image: url(http://cdn.nicolapps.ch/images/uploads/1478199301.png);
+  background-size: 35px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  
+  opacity: 0;
+  transition: .15s opacity ease-in-out;
 }
 
-.color input[type="radio"]:checked  {
-   background:gray;
+.color input:checked + i {
+  opacity: 1;
 }
