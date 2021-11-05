@@ -13,7 +13,7 @@ const TodoLists = () => {
 
   const [searchText, setSearchText] = useState<string>('')
 
-  let todoList: [] =
+  let todoList =
     typeof window !== 'undefined'
       ? JSON.parse(localStorage.getItem('list'))
       : null
@@ -21,15 +21,18 @@ const TodoLists = () => {
   let filterList = []
 
   {
-    star
-      ? todoList != null &&
-        (filterList = todoList.filter((data: data) => data.hasStar == true))
-      : todoList != null &&
-        (filterList = todoList.filter((data: data) =>
-          data.title.toLowerCase().includes(searchText.toLowerCase())
-        ))
+    star &&
+      todoList != null &&
+      (todoList = todoList.filter((data: data) => data.hasStar == true))
   }
-  var todoLists = filterList.reverse()
+
+  todoList != null &&
+    (filterList = todoList.filter((data: data) =>
+      data.title.toLowerCase().includes(searchText.toLowerCase())
+    ))
+
+  let todoLists = filterList.reverse()
+
   return (
     <div className="p-5 border-start min-vh-100">
       <Row className="d-flex justify-content-center mb-4">
@@ -41,7 +44,13 @@ const TodoLists = () => {
           />
         </Form>
       </Row>
-      <Row>{star ? <h1 style={{color:"#FECD03"}}>Star Notes</h1> : <h1>All Notes</h1>}</Row>
+      <Row>
+        {star ? (
+          <h1 style={{ color: '#FECD03' }}>Star Notes</h1>
+        ) : (
+          <h1>All Notes</h1>
+        )}
+      </Row>
       <Row>
         <Col>
           <div className="d-flex flex-wrap justify-content-start">
