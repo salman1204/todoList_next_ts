@@ -21,7 +21,7 @@ const TodoLists = () => {
     ))
 
   return (
-    <div className="p-5">
+    <div className="p-5 border-start min-vh-100" >
       <Row className="d-flex justify-content-center mb-4">
         <Form className="w-75">
           <FormControl

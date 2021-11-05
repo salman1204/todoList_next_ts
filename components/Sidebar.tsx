@@ -8,7 +8,7 @@ const Sidebar = () => {
   
   
   return (
-    <div className="flex-column border-end min-vh-100 p-0 m-0">
+    <div className="flex-column p-0 m-0">
       <div className="d-flex justify-content-center pt-4">
         <h6>
           {' '}

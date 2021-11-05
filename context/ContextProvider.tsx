@@ -1,6 +1,15 @@
 import React, { createContext, useState } from 'react'
 
-export const modalContext = createContext<boolean>(false)
+interface ModalContext {
+  modal: boolean;
+  handleModal ?: () => void;
+}
+
+const defaultState = {
+  modal: false,
+};
+
+export const modalContext = createContext<ModalContext>(defaultState)
 
 const ContextProvider = (props) => {
   const [modal, setModal] = useState<boolean>(false)
