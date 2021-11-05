@@ -1,6 +1,6 @@
-import Router from 'next/router'
 import { useContext, useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
+import { AiOutlineClose } from 'react-icons/ai'
 import Modal from 'react-modal'
 import { modalContext } from '../context/ContextProvider'
 
@@ -17,12 +17,13 @@ const customStyles = {
     bottom: 'auto',
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
+    borderRadius: '5%',
   },
 }
 
 const TodoForm = () => {
   const [values, setValues] = useState<initialValues | null>(null)
-  const { modal, handleModal } = useContext(modalContext)
+  const { handleModal } = useContext(modalContext)
 
   useEffect(() => {
     !localStorage.getItem('list') &&
@@ -43,41 +44,45 @@ const TodoForm = () => {
     formData = JSON.parse(localStorage.getItem('list')) || []
     formData.push(values)
     localStorage.setItem('list', JSON.stringify(formData))
-    Router.push('/')
+    handleModal()
   }
 
   return (
     <Modal isOpen={true} onRequestClose={handleModal} style={customStyles}>
       <div className=" d-flex row align-items-center justify-content-center m-0 p-0">
-        <div onClick={handleModal}>close</div>
+        <div className="d-flex justify-content-between mb-3">
+          <span></span>
+          <span>New Note</span>
+          <AiOutlineClose onClick={handleModal} style={{ cursor: 'pointer' }} />
+        </div>
+
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Enter Title</Form.Label>
+            <Form.Label>Note Title</Form.Label>
             <Form.Control
               required
               type="text"
               name="title"
-              placeholder="Enter Title"
               onChange={handleForm}
             />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Description</Form.Label>
+            <Form.Label>Note Details</Form.Label>
             <Form.Control
               required
               as="textarea"
               name="description"
               rows={3}
-              placeholder="Write Description"
               onChange={handleForm}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Make this note star" />
           </Form.Group>
-          <Button variant="primary" type="submit">
-            Submit
+          
+          <Button variant="dark" type="submit">
+            save
           </Button>
         </Form>
       </div>
