@@ -8,6 +8,7 @@ interface initialValues {
   title: string
   description: string
   hasStar: boolean
+  date: string
 }
 
 const customStyles = {
@@ -23,10 +24,32 @@ const customStyles = {
 }
 
 const NoteForm = () => {
+
+  const monthNames = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+  const dateObj = new Date()
+  const month = monthNames[dateObj.getMonth()]
+  const day = String(dateObj.getDate()).padStart(2, '0')
+  const year = dateObj.getFullYear()
+  const currentDate = day + ' ' + month + ', ' + year
+
   const [values, setValues] = useState<initialValues>({
     title: '',
     description: '',
     hasStar: false,
+    date: currentDate,
   })
   const [hasStar] = useState<boolean>()
 
@@ -47,6 +70,10 @@ const NoteForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    setValues({
+      ...values,
+      date: "hi",
+    })
     let formData = []
     formData = JSON.parse(localStorage.getItem('list')) || []
     formData.push(values)

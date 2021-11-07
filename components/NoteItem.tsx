@@ -8,6 +8,7 @@ type NoteItems = {
     description: string
     color: string
     hasStar: boolean
+    date: string
   }
 }
 
@@ -32,7 +33,7 @@ const NoteItem = ({ item }: NoteItems) => {
       <div>{item.description}</div>
       <div className="position-absolute display-inline-flex bottom-0 mb-2 w-100">
         <div className="d-flex justify-content-between">
-          <div>Jan 21, 2002</div>
+          <div>{item.date}</div>
           <div className="pe-4">
             <IconContext.Provider value={{ size: '25px' }}>
               <div className="d-inline-block pe-2">
