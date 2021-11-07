@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react'
 
 interface ModalContext {
   modal: boolean
-  handleModal?: () => void
+  handleModal ?: () => void
 }
 
 const defaultState = {

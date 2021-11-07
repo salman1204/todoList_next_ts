@@ -10,32 +10,17 @@ const Template = () => {
 
   return (
     <>
-      {modal ? (
-        <Row>
-          <NoteForm />
+      <Row>
+        <Col xs={1}>
+          <Sidebar />
+        </Col>
+        <Col>
           <Row>
-            <Col xs={1}>
-              <Sidebar />
-            </Col>
-            <Col>
-              <Row>
-                <NoteLists />
-              </Row>
-            </Col>
+            <NoteLists />
           </Row>
-        </Row>
-      ) : (
-        <Row>
-          <Col xs={1}>
-            <Sidebar />
-          </Col>
-          <Col>
-            <Row>
-              <NoteLists />
-            </Row>
-          </Col>
-        </Row>
-      )}
+        </Col>
+      </Row>
+      {modal && <NoteForm />}
     </>
   )
 }

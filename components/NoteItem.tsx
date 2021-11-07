@@ -9,6 +9,7 @@ type NoteItems = {
     color: string
     hasStar: boolean
     date: string
+    id: number
   }
 }
 
@@ -37,7 +38,7 @@ const NoteItem = ({ item }: NoteItems) => {
           <div className="pe-4">
             <IconContext.Provider value={{ size: '25px' }}>
               <div className="d-inline-block pe-2">
-                <AiOutlineDelete />
+                <AiOutlineDelete onClick={()=> console.log(item.id)}/>
               </div>
             </IconContext.Provider>
             <IconContext.Provider value={{ color: '#fff', size: '23px' }}>

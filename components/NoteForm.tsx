@@ -3,12 +3,14 @@ import { Button, Form } from 'react-bootstrap'
 import { AiOutlineClose } from 'react-icons/ai'
 import Modal from 'react-modal'
 import { modalContext } from '../context/ModalProvider'
+import ColorPicker from './ColorPicker'
 
 interface initialValues {
   title: string
   description: string
   hasStar: boolean
   date: string
+  id: number
 }
 
 const customStyles = {
@@ -24,7 +26,6 @@ const customStyles = {
 }
 
 const NoteForm = () => {
-
   const monthNames = [
     'January',
     'February',
@@ -50,6 +51,7 @@ const NoteForm = () => {
     description: '',
     hasStar: false,
     date: currentDate,
+    id: Math.floor(Math.random() * 10000),
   })
   const [hasStar] = useState<boolean>()
 
@@ -70,10 +72,6 @@ const NoteForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setValues({
-      ...values,
-      date: "hi",
-    })
     let formData = []
     formData = JSON.parse(localStorage.getItem('list')) || []
     formData.push(values)
@@ -123,70 +121,7 @@ const NoteForm = () => {
             />
           </Form.Group>
           <div className="d-flex justify-content-between py-3">
-            <div>
-              <div
-                className="color border"
-                style={{ backgroundColor: '#FFFFFF' }}
-              >
-                <input
-                  type="radio"
-                  name="color"
-                  value="#FFFFFF"
-                  onChange={handleForm}
-                />
-                <i className="checkbox-icon"></i>
-              </div>
-              <div className="color" style={{ backgroundColor: '#01D4FF' }}>
-                <input
-                  type="radio"
-                  name="color"
-                  value="#01D4FF"
-                  onChange={handleForm}
-                />
-                <i className="checkbox-icon"></i>
-              </div>
-
-              <div className="color" style={{ backgroundColor: '#FF9B73' }}>
-                <input
-                  type="radio"
-                  name="color"
-                  value="#FF9B73"
-                  onChange={handleForm}
-                />
-                <i className="checkbox-icon"></i>
-              </div>
-
-              <div className="color" style={{ backgroundColor: '#B692FE' }}>
-                <input
-                  type="radio"
-                  name="color"
-                  value="#B692FE"
-                  onChange={handleForm}
-                />
-                <i className="checkbox-icon"></i>
-              </div>
-
-              <div className="color" style={{ backgroundColor: '#E4EE90' }}>
-                <input
-                  type="radio"
-                  name="color"
-                  value="#E4EE90"
-                  onChange={handleForm}
-                />
-                <i className="checkbox-icon"></i>
-              </div>
-
-              <div className="color" style={{ backgroundColor: '#FFC971' }}>
-                <input
-                  type="radio"
-                  name="color"
-                  value="#FFC971"
-                  onChange={handleForm}
-                />
-                <i className="checkbox-icon"></i>
-              </div>
-            </div>
-
+            <ColorPicker handleForm={handleForm} />
             <Button variant="dark" type="submit">
               save
             </Button>
