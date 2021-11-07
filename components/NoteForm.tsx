@@ -22,7 +22,7 @@ const customStyles = {
   },
 }
 
-const TodoForm = () => {
+const NoteForm = () => {
   const [values, setValues] = useState<initialValues>({
     title: '',
     description: '',
@@ -90,7 +90,9 @@ const TodoForm = () => {
               label="Make this note star"
               name="hasStar"
               checked={hasStar}
-              onChange={()=> {values.hasStar = !hasStar}}
+              onChange={() => {
+                values.hasStar = !hasStar
+              }}
             />
           </Form.Group>
           <div className="d-flex justify-content-between py-3">
@@ -168,4 +170,4 @@ const TodoForm = () => {
   )
 }
 
-export default TodoForm
+export default NoteForm

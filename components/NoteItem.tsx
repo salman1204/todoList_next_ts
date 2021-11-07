@@ -2,7 +2,7 @@ import { IconContext } from 'react-icons'
 import { AiFillStar, AiOutlineDelete } from 'react-icons/ai'
 import { VscEdit } from 'react-icons/vsc'
 
-type TodoItems = {
+type NoteItems = {
   item: {
     title: string
     description: string
@@ -11,7 +11,7 @@ type TodoItems = {
   }
 }
 
-const TodoItem = ({ item }: TodoItems) => {
+const NoteItem = ({ item }: NoteItems) => {
   return (
     <div
       className="todo__card__main  mt-3 p-3 me-2 position-relative "
@@ -51,4 +51,4 @@ const TodoItem = ({ item }: TodoItems) => {
   )
 }
 
-export default TodoItem
+export default NoteItem

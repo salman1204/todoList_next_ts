@@ -1,14 +1,14 @@
 import { useContext, useState } from 'react'
 import { Col, Form, FormControl, Row } from 'react-bootstrap'
 import { starContext } from '../context/StarListProvider'
-import TodoItem from './TodoItem'
+import NoteItem from './NoteItem'
 
 type data = {
   title: string
   hasStar: boolean
 }
 
-const TodoLists = () => {
+const NoteLists = () => {
   const { star } = useContext(starContext)
 
   const [searchText, setSearchText] = useState<string>('')
@@ -31,7 +31,7 @@ const TodoLists = () => {
       data.title.toLowerCase().includes(searchText.toLowerCase())
     ))
 
-  let todoLists = filterList.reverse()
+  let NoteLists = filterList.reverse()
 
   return (
     <div className="p-5 border-start min-vh-100">
@@ -54,9 +54,9 @@ const TodoLists = () => {
       <Row>
         <Col>
           <div className="d-flex flex-wrap justify-content-start">
-            {todoLists != null &&
-              todoLists.map((item) => (
-                <TodoItem key={Math.floor(Math.random() * 1000)} item={item} />
+            {NoteLists != null &&
+              NoteLists.map((item) => (
+                <NoteItem key={Math.floor(Math.random() * 1000)} item={item} />
               ))}
           </div>
         </Col>
@@ -65,4 +65,4 @@ const TodoLists = () => {
   )
 }
 
-export default TodoLists
+export default NoteLists

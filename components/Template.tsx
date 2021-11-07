@@ -1,29 +1,28 @@
 import { useContext } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { modalContext } from '../context/ModalProvider'
+import NoteForm from './NoteForm'
+import NoteLists from './NoteLists'
 import Sidebar from './Sidebar'
-import TodoForm from './TodoForm'
-import TodoLists from './TodoLists'
-
 
 const Template = () => {
-  const {modal} = useContext(modalContext)
+  const { modal } = useContext(modalContext)
 
   return (
     <>
       {modal ? (
         <Row>
-        <TodoForm />
-        <Row>
-          <Col xs={1}>
-            <Sidebar />
-          </Col>
-          <Col >
-            <Row >
-              <TodoLists />
-            </Row>
-          </Col>
-        </Row>
+          <NoteForm />
+          <Row>
+            <Col xs={1}>
+              <Sidebar />
+            </Col>
+            <Col>
+              <Row>
+                <NoteLists />
+              </Row>
+            </Col>
+          </Row>
         </Row>
       ) : (
         <Row>
@@ -32,7 +31,7 @@ const Template = () => {
           </Col>
           <Col>
             <Row>
-              <TodoLists />
+              <NoteLists />
             </Row>
           </Col>
         </Row>
