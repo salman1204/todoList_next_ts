@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap'
 import { AiOutlineClose } from 'react-icons/ai'
 import Modal from 'react-modal'
 import { modalContext } from '../context/ModalProvider'
+import { currentDataFinder } from '../helperFunctions/currentDateFinder'
 import ColorPicker from './ColorPicker'
 
 interface initialValues {
@@ -26,25 +27,7 @@ const customStyles = {
 }
 
 const NoteForm = () => {
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ]
-  const dateObj = new Date()
-  const month = monthNames[dateObj.getMonth()]
-  const day = String(dateObj.getDate()).padStart(2, '0')
-  const year = dateObj.getFullYear()
-  const currentDate = day + ' ' + month + ', ' + year
+  let currentDate = currentDataFinder()
 
   const [values, setValues] = useState<initialValues>({
     title: '',
@@ -53,6 +36,7 @@ const NoteForm = () => {
     date: currentDate,
     id: Math.floor(Math.random() * 10000),
   })
+ 
   const [hasStar] = useState<boolean>()
 
   const { handleModal } = useContext(modalContext)
