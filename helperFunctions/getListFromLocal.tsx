@@ -8,6 +8,5 @@ export const getListFromLocal = (deleteUuid) => {
         localStorage.setItem('list', JSON.stringify(updatedList))
         var todoList = JSON.parse(localStorage.getItem('list'))
       }
-    
       return todoList;
 }
