@@ -27,6 +27,8 @@ const customStyles = {
 }
 
 const NoteForm = () => {
+  const { handleModalOpener } = useContext(modalContext)
+
   let currentDate = currentDataFinder()
 
   const [values, setValues] = useState<initialValues>({
@@ -36,10 +38,8 @@ const NoteForm = () => {
     date: currentDate,
     id: Math.floor(Math.random() * 10000),
   })
- 
-  const [hasStar] = useState<boolean>()
 
-  const { handleModal } = useContext(modalContext)
+  const [hasStar] = useState<boolean>()
 
   useEffect(() => {
     !localStorage.getItem('list') &&
@@ -60,16 +60,23 @@ const NoteForm = () => {
     formData = JSON.parse(localStorage.getItem('list')) || []
     formData.push(values)
     localStorage.setItem('list', JSON.stringify(formData))
-    handleModal()
+    handleModalOpener()
   }
 
   return (
-    <Modal isOpen={true} onRequestClose={handleModal} style={customStyles}>
+    <Modal
+      isOpen={true}
+      onRequestClose={handleModalOpener}
+      style={customStyles}
+    >
       <div className=" d-flex row align-items-center justify-content-center m-0">
         <div className="d-flex justify-content-between mb-5 pt-3">
           <span></span>
           <span>New Note</span>
-          <AiOutlineClose onClick={handleModal} style={{ cursor: 'pointer' }} />
+          <AiOutlineClose
+            onClick={handleModalOpener}
+            style={{ cursor: 'pointer' }}
+          />
         </div>
 
         <Form onSubmit={handleSubmit}>

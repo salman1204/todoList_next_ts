@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react'
 
 interface ModalContext {
   modal: boolean
-  handleModal ?: () => void
+  handleModalOpener?: () => void
 }
 
 const defaultState = {
@@ -13,12 +13,12 @@ export const modalContext = createContext<ModalContext>(defaultState)
 
 const ModalProvider = (props) => {
   const [modal, setModal] = useState<boolean>(false)
-  const handleModal = () => {
+  const handleModalOpener = () => {
     setModal(!modal)
   }
 
   return (
-    <modalContext.Provider value={{ modal, handleModal }}>
+    <modalContext.Provider value={{ modal, handleModalOpener }}>
       {props.children}
     </modalContext.Provider>
   )

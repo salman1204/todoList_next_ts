@@ -64,3 +64,16 @@
 .color input:checked + i {
   opacity: 1;
 }
+
+
+/* Modal CSS */
+
+.modal {
+  top: 50%;
+  left: 50%;
+  right: 50%;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5%
+}

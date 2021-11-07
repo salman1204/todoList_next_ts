@@ -1,10 +1,10 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Template from '../components/Template';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import NoteTemplate from '../components/NoteTemplate'
 
 export default function Home() {
   return (
     <div>
-      <Template/>
+      <NoteTemplate />
     </div>
   )
 }

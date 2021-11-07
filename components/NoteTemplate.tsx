@@ -5,7 +5,7 @@ import NoteForm from './NoteForm'
 import NoteLists from './NoteLists'
 import Sidebar from './Sidebar'
 
-const Template = () => {
+const NoteTemplate = () => {
   const { modal } = useContext(modalContext)
 
   return (
@@ -25,4 +25,4 @@ const Template = () => {
   )
 }
 
-export default Template
+export default NoteTemplate

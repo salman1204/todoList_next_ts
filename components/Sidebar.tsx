@@ -4,9 +4,9 @@ import { modalContext } from '../context/ModalProvider'
 import { starContext } from '../context/StarListProvider'
 
 const Sidebar = () => {
-  const { handleModal } = useContext(modalContext)
+  const { handleModalOpener } = useContext(modalContext)
   const { handleStar } = useContext(starContext)
-  
+
   return (
     <div className="flex-column p-0 m-0">
       <div className="d-flex justify-content-center pt-4">
@@ -25,7 +25,7 @@ const Sidebar = () => {
       <div className="d-flex justify-content-center">
         <div
           className="mt-3 p-2 d-inline-block rounded-circle icon__background"
-          onClick={handleModal}
+          onClick={handleModalOpener}
         >
           <AiOutlinePlus size={25} color={'#FFF'} />
         </div>

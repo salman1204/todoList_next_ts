@@ -24,11 +24,9 @@ const NoteItem = ({ item }: NoteItems) => {
           <b>{item.title}</b>
         </h5>
         {item.hasStar && (
-          <IconContext.Provider value={{ color: '#FECD03', size: '25px' }}>
             <div className="p-2 d-inline-block rounded-circle icon__background">
-              <AiFillStar />
-            </div>
-          </IconContext.Provider>
+              <AiFillStar color = {`#FECD03`}  size= {25} />
+            </div> 
         )}
       </div>
       <div>{item.description}</div>
@@ -36,16 +34,12 @@ const NoteItem = ({ item }: NoteItems) => {
         <div className="d-flex justify-content-between">
           <div>{item.date}</div>
           <div className="pe-4">
-            <IconContext.Provider value={{ size: '25px' }}>
               <div className="d-inline-block pe-2">
-                <AiOutlineDelete onClick={()=> console.log(item.id)}/>
+                <AiOutlineDelete size={25} onClick={()=> console.log(item.id)}/>
               </div>
-            </IconContext.Provider>
-            <IconContext.Provider value={{ color: '#fff', size: '23px' }}>
               <div className="p-2 d-inline-block rounded-circle icon__background">
-                <VscEdit />
+                <VscEdit color = {`#FFFFFF`}  size= {23} />
               </div>
-            </IconContext.Provider>
           </div>
         </div>
       </div>
