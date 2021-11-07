@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import { IconContext } from 'react-icons'
 import { AiFillStar, AiOutlineDelete } from 'react-icons/ai'
 import { VscEdit } from 'react-icons/vsc'
+import { deleteContext } from '../context/DeleteUuidProvider'
 
 type NoteItems = {
   item: {
@@ -14,6 +16,9 @@ type NoteItems = {
 }
 
 const NoteItem = ({ item }: NoteItems) => {
+
+  const { handleDeleteUuid } = useContext(deleteContext)
+ 
   return (
     <div
       className="todo__card__main  mt-3 p-3 me-2 position-relative "
@@ -35,7 +40,7 @@ const NoteItem = ({ item }: NoteItems) => {
           <div>{item.date}</div>
           <div className="pe-4">
               <div className="d-inline-block pe-2">
-                <AiOutlineDelete size={25} onClick={()=> console.log(item.id)}/>
+                <AiOutlineDelete size={25} onClick={() => handleDeleteUuid(item.id)}/>
               </div>
               <div className="p-2 d-inline-block rounded-circle icon__background">
                 <VscEdit color = {`#FFFFFF`}  size= {23} />

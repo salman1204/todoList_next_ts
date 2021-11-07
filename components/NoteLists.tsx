@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import { Col, Form, FormControl, Row } from 'react-bootstrap'
+import { deleteContext } from '../context/DeleteUuidProvider'
 import { starContext } from '../context/StarListProvider'
 import NoteItem from './NoteItem'
 
@@ -10,13 +11,18 @@ type data = {
 
 const NoteLists = () => {
   const { star } = useContext(starContext)
+  const { deleteUuid } = useContext(deleteContext)
+
+  const ISSERVER = typeof window === 'undefined'
+
+  if (!ISSERVER) {
+    let notes = JSON.parse(localStorage.getItem('list'))
+    let updatedList = notes.filter((note) => note.id !== deleteUuid)
+    localStorage.setItem('list', JSON.stringify(updatedList))
+    var todoList = JSON.parse(localStorage.getItem('list'))
+  }
 
   const [searchText, setSearchText] = useState<string>('')
-
-  let todoList =
-    typeof window !== 'undefined'
-      ? JSON.parse(localStorage.getItem('list'))
-      : null
 
   let filterList = []
 
