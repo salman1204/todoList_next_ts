@@ -1,9 +1,8 @@
 import { useContext } from 'react'
 import { AiFillStar, AiOutlineDelete } from 'react-icons/ai'
 import { VscEdit } from 'react-icons/vsc'
-import {modalContext} from '../context/ModalProvider'
+import { modalContext } from '../context/ModalProvider'
 import { noteListContext } from '../context/NoteListProvider'
-import { updateContext } from '../context/UpdateUuidProvider'
 
 type NoteItems = {
   item: {
@@ -17,11 +16,8 @@ type NoteItems = {
 }
 
 const NoteItem = ({ item }: NoteItems) => {
-  
   const { handleUpdateModalOpener } = useContext(modalContext)
-  const { handleUpdateUuid } = useContext(updateContext)
-  const { handleUpdateNote, handelDeleteNote } = useContext(noteListContext)
-
+  const { handleUpdateId, handelDeleteNote } = useContext(noteListContext)
 
   return (
     <div
@@ -33,9 +29,9 @@ const NoteItem = ({ item }: NoteItems) => {
           <b>{item.title}</b>
         </h5>
         {item.hasStar && (
-            <div className="p-2 d-inline-block rounded-circle icon__background">
-              <AiFillStar color = {`#FECD03`}  size= {25} />
-            </div> 
+          <div className="p-2 d-inline-block rounded-circle icon__background">
+            <AiFillStar color={`#FECD03`} size={25} />
+          </div>
         )}
       </div>
       <div>{item.description}</div>
@@ -43,12 +39,22 @@ const NoteItem = ({ item }: NoteItems) => {
         <div className="d-flex justify-content-between">
           <div>{item.date}</div>
           <div className="pe-4">
-              <div className="d-inline-block pe-2">
-                <AiOutlineDelete size={25} onClick={() => handelDeleteNote(item.id)}/>
-              </div>
-              <div className="p-2 d-inline-block rounded-circle icon__background" onClick={handleUpdateModalOpener}>
-                <VscEdit color = {`#FFFFFF`}  size= {23} onClick={() => handleUpdateNote(item.id)}/>
-              </div>
+            <div className="d-inline-block pe-2">
+              <AiOutlineDelete
+                size={25}
+                onClick={() => handelDeleteNote(item.id)}
+              />
+            </div>
+            <div
+              className="p-2 d-inline-block rounded-circle icon__background"
+              onClick={handleUpdateModalOpener}
+            >
+              <VscEdit
+                color={`#FFFFFF`}
+                size={23}
+                onClick={() => handleUpdateId(item.id)}
+              />
+            </div>
           </div>
         </div>
       </div>

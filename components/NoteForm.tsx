@@ -4,9 +4,7 @@ import { AiOutlineClose } from 'react-icons/ai'
 import Modal from 'react-modal'
 import { modalContext } from '../context/ModalProvider'
 import { noteListContext } from '../context/NoteListProvider'
-import { updateContext } from '../context/UpdateUuidProvider'
 import { currentDataFinder } from '../helperFunctions/currentDateFinder'
-import { getListFromLocal } from '../helperFunctions/getListFromLocal'
 import ColorPicker from './ColorPicker'
 
 interface initialValues {
@@ -15,7 +13,7 @@ interface initialValues {
   hasStar: boolean
   date: string
   id: number
-  color ?: string
+  color?: string
 }
 
 type FormProps = {
@@ -35,17 +33,11 @@ const customStyles = {
 }
 
 const NoteForm = ({ type }: FormProps) => {
-  const { handleModalOpener, handleUpdateModalOpener } = useContext(modalContext)
-  const { handleCreateNewNote } = useContext(noteListContext)
-
-  const { updateUuid } = useContext(updateContext)
+  const { handleModalOpener, handleUpdateModalOpener } =
+    useContext(modalContext)
+  const { handleCreateNewNote, handleUpdateNote } = useContext(noteListContext)
 
   let currentDate = currentDataFinder()
-
-  const allNotes = getListFromLocal()
-
-  let updateItem =
-    allNotes !== null && allNotes.filter((note) => note.id == updateUuid)
 
   const [values, setValues] = useState<initialValues>({
     title: '',
@@ -82,10 +74,8 @@ const NoteForm = ({ type }: FormProps) => {
 
   const handleaUpdateNote = (e) => {
     e.preventDefault()
-    let updateItem =
-      allNotes !== null && allNotes.filter((note) => note.id !== updateUuid)
-    updateItem.push(values)
-    localStorage.setItem('list', JSON.stringify(updateItem))
+    handleUpdateNote(values)
+    handleCreateNewNote()
     handleUpdateModalOpener()
   }
 
@@ -118,8 +108,8 @@ const NoteForm = ({ type }: FormProps) => {
               required
               type="text"
               name="title"
-              defaultValue={type == 'create' ? '' : updateItem[0].title}
-              onChange={ handleForm }
+              // defaultValue={type == 'create' ? '' : updateItem[0].title}
+              onChange={handleForm}
             />
           </Form.Group>
 
@@ -130,8 +120,8 @@ const NoteForm = ({ type }: FormProps) => {
               as="textarea"
               name="description"
               rows={3}
-              defaultValue={type == 'create' ? '' : updateItem[0].description}
-              onChange={ handleForm }
+              // defaultValue={type == 'create' ? '' : updateItem[0].description}
+              onChange={handleForm}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
