@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { AiFillStar, AiOutlineDelete } from 'react-icons/ai'
 import { VscEdit } from 'react-icons/vsc'
-import { deleteContext } from '../context/DeleteUuidProvider'
 import {modalContext} from '../context/ModalProvider'
 import { noteListContext } from '../context/NoteListProvider'
 import { updateContext } from '../context/UpdateUuidProvider'
@@ -18,8 +17,7 @@ type NoteItems = {
 }
 
 const NoteItem = ({ item }: NoteItems) => {
-
-  const { handleDeleteUuid } = useContext(deleteContext)
+  
   const { handleUpdateModalOpener } = useContext(modalContext)
   const { handleUpdateUuid } = useContext(updateContext)
   const { handelDeleteNote } = useContext(noteListContext)

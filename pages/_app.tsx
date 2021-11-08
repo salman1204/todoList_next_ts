@@ -1,4 +1,4 @@
-import DeleteUuidProvider from '../context/DeleteUuidProvider'
+
 import ModalProvider from '../context/ModalProvider'
 import NoteListProvider from '../context/NoteListProvider'
 import StarListProviderProvider from '../context/StarListProvider'
@@ -10,11 +10,9 @@ function MyApp({ Component, pageProps }) {
     <NoteListProvider>
       <ModalProvider>
         <StarListProviderProvider>
-          <DeleteUuidProvider>
             <UpdateUuidProvider>
               <Component {...pageProps} />
-            </UpdateUuidProvider>
-          </DeleteUuidProvider>
+            </UpdateUuidProvider>  
         </StarListProviderProvider>
       </ModalProvider>
     </NoteListProvider>
