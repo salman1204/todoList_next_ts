@@ -38,7 +38,6 @@ const NoteForm = ({ type }: FormProps) => {
   const { handleModalOpener, handleUpdateModalOpener } = useContext(modalContext)
   const { handleCreateNewNote } = useContext(noteListContext)
 
-
   const { updateUuid } = useContext(updateContext)
 
   let currentDate = currentDataFinder()

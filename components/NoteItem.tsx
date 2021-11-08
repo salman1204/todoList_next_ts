@@ -20,7 +20,8 @@ const NoteItem = ({ item }: NoteItems) => {
   
   const { handleUpdateModalOpener } = useContext(modalContext)
   const { handleUpdateUuid } = useContext(updateContext)
-  const { handelDeleteNote } = useContext(noteListContext)
+  const { handleUpdateNote, handelDeleteNote } = useContext(noteListContext)
+
 
   return (
     <div
@@ -46,7 +47,7 @@ const NoteItem = ({ item }: NoteItems) => {
                 <AiOutlineDelete size={25} onClick={() => handelDeleteNote(item.id)}/>
               </div>
               <div className="p-2 d-inline-block rounded-circle icon__background" onClick={handleUpdateModalOpener}>
-                <VscEdit color = {`#FFFFFF`}  size= {23} onClick={() => handleUpdateUuid(item.id)}/>
+                <VscEdit color = {`#FFFFFF`}  size= {23} onClick={() => handleUpdateNote(item.id)}/>
               </div>
           </div>
         </div>

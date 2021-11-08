@@ -4,7 +4,7 @@ import { getListFromLocal } from '../helperFunctions/getListFromLocal'
 interface NoteListContext {
   noteLists: {}[]
   handleCreateNewNote?: () => void
-  handleUpdateNote?: () => void
+  handleUpdateNote?: (id: number, values?: object) => void
   handelDeleteNote?: (id: number) => void
 }
 
@@ -26,7 +26,14 @@ const NoteListProvider = (props) => {
     setNoteLists(notes)
   }
 
-  const handleUpdateNote = () => {}
+  const handleUpdateNote = (id, values) => {
+    handelDeleteNote(id);
+    let formData = []
+    formData = JSON.parse(localStorage.getItem('list')) || []
+    formData.push(values)
+    localStorage.setItem('list', JSON.stringify(formData))
+
+  }
 
   const handelDeleteNote = (id) => {
     let notes = JSON.parse(localStorage.getItem('list'))
