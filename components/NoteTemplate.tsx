@@ -4,7 +4,6 @@ import { modalContext } from '../context/ModalProvider'
 import NoteForm from './NoteForm'
 import NoteLists from './NoteLists'
 import Sidebar from './Sidebar'
-import UpdateForm from './UpdateForm'
 
 const NoteTemplate = () => {
   const { modal, updateModal } = useContext(modalContext)
@@ -21,8 +20,8 @@ const NoteTemplate = () => {
           </Row>
         </Col>
       </Row>
-      {modal && <NoteForm />}
-      {updateModal && <UpdateForm/>}
+      {modal && <NoteForm type="create"/>}
+      {updateModal && <NoteForm type="update"/>}
     </>
   )
 }

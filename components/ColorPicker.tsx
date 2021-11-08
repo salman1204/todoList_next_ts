@@ -4,7 +4,6 @@ interface handleForm {
 
 const ColorPicker = ({ handleForm }: handleForm) => {
   let colors = [
-    '#FFFFFF',
     '#01D4FF',
     '#FF9B73',
     '#B692FE',

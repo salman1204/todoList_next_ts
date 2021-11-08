@@ -3,7 +3,9 @@ import { Button, Form } from 'react-bootstrap'
 import { AiOutlineClose } from 'react-icons/ai'
 import Modal from 'react-modal'
 import { modalContext } from '../context/ModalProvider'
+import { updateContext } from '../context/UpdateUuidProvider'
 import { currentDataFinder } from '../helperFunctions/currentDateFinder'
+import { getListFromLocal } from '../helperFunctions/getListFromLocal'
 import ColorPicker from './ColorPicker'
 
 interface initialValues {
@@ -12,6 +14,10 @@ interface initialValues {
   hasStar: boolean
   date: string
   id: number
+}
+
+type FormProps = {
+  type: string
 }
 
 const customStyles = {
@@ -26,8 +32,11 @@ const customStyles = {
   },
 }
 
-const NoteForm = () => {
-  const { handleModalOpener } = useContext(modalContext)
+const NoteForm = ({ type }: FormProps) => {
+  const { handleModalOpener, handleUpdateModalOpener } =
+    useContext(modalContext)
+
+  const { updateUuid } = useContext(updateContext)
 
   let currentDate = currentDataFinder()
 
@@ -53,8 +62,12 @@ const NoteForm = () => {
       [name]: value,
     })
   }
+  const allNotes = getListFromLocal()
 
-  const handleSubmit = (e) => {
+  let updateItem =
+    allNotes !== null && allNotes.filter((note) => note.id == updateUuid)
+
+  const handleCreateNote = (e) => {
     e.preventDefault()
     let formData = []
     formData = JSON.parse(localStorage.getItem('list')) || []
@@ -63,29 +76,45 @@ const NoteForm = () => {
     handleModalOpener()
   }
 
+  const handleaUpdateNote = (e) => {
+    e.preventDefault()
+    let updateItem =
+      allNotes !== null && allNotes.filter((note) => note.id !== updateUuid)
+    updateItem.push(values)
+    localStorage.setItem('list', JSON.stringify(updateItem))
+    handleUpdateModalOpener()
+  }
+
   return (
     <Modal
       isOpen={true}
-      onRequestClose={handleModalOpener}
+      onRequestClose={
+        type == 'create' ? handleModalOpener : handleUpdateModalOpener
+      }
       style={customStyles}
     >
       <div className=" d-flex row align-items-center justify-content-center m-0">
         <div className="d-flex justify-content-between mb-5 pt-3">
           <span></span>
-          <span>New Note</span>
+          {type == 'create' ? <span>New Note</span> : <span>Update Note</span>}
           <AiOutlineClose
-            onClick={handleModalOpener}
+            onClick={
+              type == 'create' ? handleModalOpener : handleUpdateModalOpener
+            }
             style={{ cursor: 'pointer' }}
           />
         </div>
 
-        <Form onSubmit={handleSubmit}>
+        <Form
+          onSubmit={type == 'create' ? handleCreateNote : handleaUpdateNote}
+        >
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Note Title</Form.Label>
             <Form.Control
               required
               type="text"
               name="title"
+              defaultValue={type == 'create' ? '' : updateItem[0].title}
               onChange={handleForm}
             />
           </Form.Group>
@@ -97,6 +126,7 @@ const NoteForm = () => {
               as="textarea"
               name="description"
               rows={3}
+              defaultValue={type == 'create' ? '' : updateItem[0].description}
               onChange={handleForm}
             />
           </Form.Group>
@@ -114,7 +144,7 @@ const NoteForm = () => {
           <div className="d-flex justify-content-between py-3">
             <ColorPicker handleForm={handleForm} />
             <Button variant="dark" type="submit">
-              save
+              {type == 'create' ? <span>Save</span> : <span>Update</span>}
             </Button>
           </div>
         </Form>

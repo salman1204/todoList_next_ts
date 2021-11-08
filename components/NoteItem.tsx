@@ -20,7 +20,7 @@ const NoteItem = ({ item }: NoteItems) => {
 
   const { handleDeleteUuid } = useContext(deleteContext)
   const { handleUpdateModalOpener } = useContext(modalContext)
-  const { updateUuid, handleUpdateUuid } = useContext(updateContext)
+  const { handleUpdateUuid } = useContext(updateContext)
 
   return (
     <div
