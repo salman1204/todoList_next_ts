@@ -15,7 +15,7 @@ const NoteLists = () => {
   const { deleteUuid } = useContext(deleteContext)
   const [searchText, setSearchText] = useState<string>('')
 
-  let todoList = getListFromLocal(deleteUuid)
+  let todoList = getListFromLocal(deleteUuid,"delete")
  
   let filterList = []
 
