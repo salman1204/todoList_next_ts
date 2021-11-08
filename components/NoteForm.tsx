@@ -2,11 +2,13 @@ import { useContext, useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { AiOutlineClose } from 'react-icons/ai'
 import Modal from 'react-modal'
+import ClipLoader from "react-spinners/ClipLoader"
 import { modalContext } from '../context/ModalProvider'
 import { noteListContext } from '../context/NoteListProvider'
 import { currentDataFinder } from '../helperFunctions/currentDateFinder'
+import Loader from "react-loader-spinner";
 import ColorPicker from './ColorPicker'
-
+import { getListFromLocal } from '../helperFunctions/getListFromLocal'
 interface initialValues {
   title: string
   description: string
@@ -33,11 +35,15 @@ const customStyles = {
 }
 
 const NoteForm = ({ type }: FormProps) => {
-  const { handleModalOpener, handleUpdateModalOpener } =
-    useContext(modalContext)
-  const { handleCreateNewNote, handleUpdateNote } = useContext(noteListContext)
+  const { handleModalOpener, handleUpdateModalOpener } =useContext(modalContext)
+  const { updateId, handleCreateNewNote, handleUpdateNote } = useContext(noteListContext)
 
   let currentDate = currentDataFinder()
+
+  const [test,setTest] = useState(false)
+  let list = getListFromLocal();
+
+  let updatedItem = list.filter((list) => list.id == updateId)
 
   const [values, setValues] = useState<initialValues>({
     title: '',
@@ -45,6 +51,14 @@ const NoteForm = ({ type }: FormProps) => {
     hasStar: false,
     date: currentDate,
     id: Math.floor(Math.random() * 10000),
+  })
+
+  const [updateValues, setUpdateValues] = useState<initialValues>({
+    title: updatedItem[0].title,
+    description: updatedItem[0].description,
+    hasStar: updatedItem[0].hasStar,
+    date: currentDate,
+    id: 1,
   })
 
   const [hasStar] = useState<boolean>()
@@ -62,6 +76,14 @@ const NoteForm = ({ type }: FormProps) => {
     })
   }
 
+  const handleUpdateForm = (e) => {
+    const { name, value } = e.target
+    setUpdateValues({
+      ...updateValues,
+      [name]: value,
+    })
+  }
+
   const handleCreateNote = (e) => {
     e.preventDefault()
     let formData = []
@@ -74,13 +96,15 @@ const NoteForm = ({ type }: FormProps) => {
 
   const handleaUpdateNote = (e) => {
     e.preventDefault()
-    handleUpdateNote(values)
+    handleUpdateNote(updateValues)
     handleCreateNewNote()
     handleUpdateModalOpener()
   }
 
   return (
-    <Modal
+    <>
+    {
+      (updatedItem[0] == undefined) ? <Loader type="Puff" /> : <Modal
       isOpen={true}
       onRequestClose={
         type == 'create' ? handleModalOpener : handleUpdateModalOpener
@@ -108,8 +132,8 @@ const NoteForm = ({ type }: FormProps) => {
               required
               type="text"
               name="title"
-              // defaultValue={type == 'create' ? '' : updateItem[0].title}
-              onChange={handleForm}
+              defaultValue={type == 'create' ? '' : updatedItem[0].title}
+              onChange={type == 'create' ? handleForm : handleUpdateForm}
             />
           </Form.Group>
 
@@ -120,8 +144,8 @@ const NoteForm = ({ type }: FormProps) => {
               as="textarea"
               name="description"
               rows={3}
-              // defaultValue={type == 'create' ? '' : updateItem[0].description}
-              onChange={handleForm}
+              defaultValue={type == 'create' ? '' : updatedItem[0].description}
+              onChange={type == 'create' ? handleForm : handleUpdateForm}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -129,9 +153,10 @@ const NoteForm = ({ type }: FormProps) => {
               type="checkbox"
               label="Make this note star"
               name="hasStar"
-              checked={hasStar}
+              checked={type == "create" ? hasStar : updateValues.hasStar}
               onChange={() => {
                 values.hasStar = !hasStar
+                updateValues.hasStar = !updateValues.hasStar
               }}
             />
           </Form.Group>
@@ -144,7 +169,9 @@ const NoteForm = ({ type }: FormProps) => {
         </Form>
       </div>
     </Modal>
-  )
-}
+    }
+    
+  </>
+  )}
 
 export default NoteForm

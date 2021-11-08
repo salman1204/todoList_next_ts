@@ -3,6 +3,7 @@ import { getListFromLocal } from '../helperFunctions/getListFromLocal'
 
 interface NoteListContext {
   noteLists: {}[]
+  updateId: number
   handleCreateNewNote?: () => void
   handleUpdateNote?: ( values?: object) => void
   handleUpdateId?: (id: number) => void
@@ -11,6 +12,7 @@ interface NoteListContext {
 
 const defaultState = {
   noteLists: [],
+  updateId: null
 }
 
 export const noteListContext = createContext<NoteListContext>(defaultState)
@@ -26,7 +28,7 @@ const NoteListProvider = (props) => {
   const handleCreateNewNote = () => {
     setNoteLists(getListFromLocal())
   }
-  
+
   const handleUpdateId = (id) => {
     setUpdateId(id)
   }
@@ -56,6 +58,7 @@ const NoteListProvider = (props) => {
     <noteListContext.Provider
       value={{
         noteLists,
+        updateId,
         handleCreateNewNote,
         handleUpdateNote,
         handleUpdateId,
