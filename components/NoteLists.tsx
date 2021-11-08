@@ -1,6 +1,7 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Col, Form, FormControl, Row } from 'react-bootstrap'
 import { deleteContext } from '../context/DeleteUuidProvider'
+import { noteListContext } from '../context/NoteListProvider'
 import { starContext } from '../context/StarListProvider'
 import { getListFromLocal } from '../helperFunctions/getListFromLocal'
 import NoteItem from './NoteItem'
@@ -12,11 +13,11 @@ type data = {
 
 const NoteLists = () => {
   const { star } = useContext(starContext)
-  const { deleteUuid } = useContext(deleteContext)
   const [searchText, setSearchText] = useState<string>('')
+  const {noteLists} = useContext(noteListContext)
 
-  let todoList = getListFromLocal(deleteUuid,"delete")
- 
+  let todoList = noteLists;
+
   let filterList = []
 
   {

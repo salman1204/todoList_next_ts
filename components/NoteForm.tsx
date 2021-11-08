@@ -3,6 +3,7 @@ import { Button, Form } from 'react-bootstrap'
 import { AiOutlineClose } from 'react-icons/ai'
 import Modal from 'react-modal'
 import { modalContext } from '../context/ModalProvider'
+import { noteListContext } from '../context/NoteListProvider'
 import { updateContext } from '../context/UpdateUuidProvider'
 import { currentDataFinder } from '../helperFunctions/currentDateFinder'
 import { getListFromLocal } from '../helperFunctions/getListFromLocal'
@@ -14,6 +15,7 @@ interface initialValues {
   hasStar: boolean
   date: string
   id: number
+  color ?: string
 }
 
 type FormProps = {
@@ -33,12 +35,18 @@ const customStyles = {
 }
 
 const NoteForm = ({ type }: FormProps) => {
-  const { handleModalOpener, handleUpdateModalOpener } =
-    useContext(modalContext)
+  const { handleModalOpener, handleUpdateModalOpener } = useContext(modalContext)
+  const { handleCreateNewNote } = useContext(noteListContext)
+
 
   const { updateUuid } = useContext(updateContext)
 
   let currentDate = currentDataFinder()
+
+  const allNotes = getListFromLocal()
+
+  let updateItem =
+    allNotes !== null && allNotes.filter((note) => note.id == updateUuid)
 
   const [values, setValues] = useState<initialValues>({
     title: '',
@@ -62,10 +70,6 @@ const NoteForm = ({ type }: FormProps) => {
       [name]: value,
     })
   }
-  const allNotes = getListFromLocal()
-
-  let updateItem =
-    allNotes !== null && allNotes.filter((note) => note.id == updateUuid)
 
   const handleCreateNote = (e) => {
     e.preventDefault()
@@ -115,7 +119,7 @@ const NoteForm = ({ type }: FormProps) => {
               type="text"
               name="title"
               defaultValue={type == 'create' ? '' : updateItem[0].title}
-              onChange={handleForm}
+              onChange={ handleForm }
             />
           </Form.Group>
 
@@ -127,7 +131,7 @@ const NoteForm = ({ type }: FormProps) => {
               name="description"
               rows={3}
               defaultValue={type == 'create' ? '' : updateItem[0].description}
-              onChange={handleForm}
+              onChange={ handleForm }
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">

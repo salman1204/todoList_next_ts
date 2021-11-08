@@ -1,4 +1,4 @@
-export const getListFromLocal = (uuid?, operation?) => {
+export const getListFromLocal = () => {
   const ISSERVER = typeof window === 'undefined'
 
   if (!ISSERVER) {

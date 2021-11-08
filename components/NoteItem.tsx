@@ -3,6 +3,7 @@ import { AiFillStar, AiOutlineDelete } from 'react-icons/ai'
 import { VscEdit } from 'react-icons/vsc'
 import { deleteContext } from '../context/DeleteUuidProvider'
 import {modalContext} from '../context/ModalProvider'
+import { noteListContext } from '../context/NoteListProvider'
 import { updateContext } from '../context/UpdateUuidProvider'
 
 type NoteItems = {
@@ -21,6 +22,7 @@ const NoteItem = ({ item }: NoteItems) => {
   const { handleDeleteUuid } = useContext(deleteContext)
   const { handleUpdateModalOpener } = useContext(modalContext)
   const { handleUpdateUuid } = useContext(updateContext)
+  const { handelDeleteNote } = useContext(noteListContext)
 
   return (
     <div
@@ -43,7 +45,7 @@ const NoteItem = ({ item }: NoteItems) => {
           <div>{item.date}</div>
           <div className="pe-4">
               <div className="d-inline-block pe-2">
-                <AiOutlineDelete size={25} onClick={() => handleDeleteUuid(item.id)}/>
+                <AiOutlineDelete size={25} onClick={() => handelDeleteNote(item.id)}/>
               </div>
               <div className="p-2 d-inline-block rounded-circle icon__background" onClick={handleUpdateModalOpener}>
                 <VscEdit color = {`#FFFFFF`}  size= {23} onClick={() => handleUpdateUuid(item.id)}/>
