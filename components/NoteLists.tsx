@@ -15,7 +15,7 @@ const NoteLists = () => {
   const { star } = useContext(starContext)
   const [searchText, setSearchText] = useState<string>('')
   const {noteLists} = useContext(noteListContext)
-
+  
   let todoList = noteLists;
 
   let filterList = []

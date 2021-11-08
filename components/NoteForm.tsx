@@ -77,6 +77,7 @@ const NoteForm = ({ type }: FormProps) => {
     formData = JSON.parse(localStorage.getItem('list')) || []
     formData.push(values)
     localStorage.setItem('list', JSON.stringify(formData))
+    handleCreateNewNote()
     handleModalOpener()
   }
 
