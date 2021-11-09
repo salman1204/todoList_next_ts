@@ -1,12 +1,10 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { AiOutlineClose } from 'react-icons/ai'
 import Modal from 'react-modal'
-import ClipLoader from "react-spinners/ClipLoader"
 import { modalContext } from '../context/ModalProvider'
 import { noteListContext } from '../context/NoteListProvider'
 import { currentDataFinder } from '../helperFunctions/currentDateFinder'
-import Loader from "react-loader-spinner";
 import ColorPicker from './ColorPicker'
 import { getListFromLocal } from '../helperFunctions/getListFromLocal'
 interface initialValues {
@@ -36,14 +34,9 @@ const customStyles = {
 
 const NoteForm = ({ type }: FormProps) => {
   const { handleModalOpener, handleUpdateModalOpener } =useContext(modalContext)
-  const { updateId, handleCreateNewNote, handleUpdateNote } = useContext(noteListContext)
+  const { handleCreateNewNote, handleUpdateNote } = useContext(noteListContext)
 
   let currentDate = currentDataFinder()
-
-  const [test,setTest] = useState(false)
-  let list = getListFromLocal();
-
-  let updatedItem = list.filter((list) => list.id == updateId)
 
   const [values, setValues] = useState<initialValues>({
     title: '',
@@ -53,33 +46,12 @@ const NoteForm = ({ type }: FormProps) => {
     id: Math.floor(Math.random() * 10000),
   })
 
-  const [updateValues, setUpdateValues] = useState<initialValues>({
-    title: updatedItem[0].title,
-    description: updatedItem[0].description,
-    hasStar: updatedItem[0].hasStar,
-    date: currentDate,
-    id: 1,
-  })
-
   const [hasStar] = useState<boolean>()
-
-  useEffect(() => {
-    !localStorage.getItem('list') &&
-      localStorage.setItem('list', JSON.stringify([]))
-  }, [])
 
   const handleForm = (e) => {
     const { name, value } = e.target
     setValues({
       ...values,
-      [name]: value,
-    })
-  }
-
-  const handleUpdateForm = (e) => {
-    const { name, value } = e.target
-    setUpdateValues({
-      ...updateValues,
       [name]: value,
     })
   }
@@ -96,15 +68,14 @@ const NoteForm = ({ type }: FormProps) => {
 
   const handleaUpdateNote = (e) => {
     e.preventDefault()
-    handleUpdateNote(updateValues)
+    handleUpdateNote(values)
     handleCreateNewNote()
     handleUpdateModalOpener()
   }
 
   return (
     <>
-    {
-      (updatedItem[0] == undefined) ? <Loader type="Puff" /> : <Modal
+   <Modal
       isOpen={true}
       onRequestClose={
         type == 'create' ? handleModalOpener : handleUpdateModalOpener
@@ -132,8 +103,7 @@ const NoteForm = ({ type }: FormProps) => {
               required
               type="text"
               name="title"
-              defaultValue={type == 'create' ? '' : updatedItem[0].title}
-              onChange={type == 'create' ? handleForm : handleUpdateForm}
+              onChange={handleForm}
             />
           </Form.Group>
 
@@ -144,8 +114,7 @@ const NoteForm = ({ type }: FormProps) => {
               as="textarea"
               name="description"
               rows={3}
-              defaultValue={type == 'create' ? '' : updatedItem[0].description}
-              onChange={type == 'create' ? handleForm : handleUpdateForm}
+              onChange={handleForm}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -153,10 +122,9 @@ const NoteForm = ({ type }: FormProps) => {
               type="checkbox"
               label="Make this note star"
               name="hasStar"
-              checked={type == "create" ? hasStar : updateValues.hasStar}
+              checked = {hasStar}
               onChange={() => {
                 values.hasStar = !hasStar
-                updateValues.hasStar = !updateValues.hasStar
               }}
             />
           </Form.Group>
@@ -169,8 +137,6 @@ const NoteForm = ({ type }: FormProps) => {
         </Form>
       </div>
     </Modal>
-    }
-    
   </>
   )}
 

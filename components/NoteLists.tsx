@@ -14,6 +14,11 @@ const NoteLists = () => {
   const [searchText, setSearchText] = useState<string>('')
   const {noteLists} = useContext(noteListContext)
   
+  useEffect(() => {
+    !localStorage.getItem('list') &&
+      localStorage.setItem('list', JSON.stringify([]))
+  }, [])
+  
   let todoList = noteLists;
 
   let filterList = []
