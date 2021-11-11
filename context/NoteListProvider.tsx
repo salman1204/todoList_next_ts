@@ -6,7 +6,7 @@ interface NoteListContext {
   updateId: number
   updateItem: {}[]
   handleCreateNewNote?: () => void
-  handleUpdateNote?: ( values?: object) => void
+  handleUpdateNote?: (values?: object) => void
   handleUpdateId?: (id: number) => void
   handelDeleteNote?: (id: number) => void
 }
@@ -14,7 +14,7 @@ interface NoteListContext {
 const defaultState = {
   noteLists: [],
   updateId: null,
-  updateItem:  []
+  updateItem: [],
 }
 
 export const noteListContext = createContext<NoteListContext>(defaultState)
@@ -24,11 +24,7 @@ const NoteListProvider = (props) => {
   const [updateId, setUpdateId] = useState()
   const [updateItem, setUpdateItem] = useState()
 
-  useEffect(() => 
-    setNoteLists(getListFromLocal())
-  , [])
-
-
+  useEffect(() => setNoteLists(getListFromLocal()), [])
 
   const handleCreateNewNote = () => {
     setNoteLists(getListFromLocal())
@@ -36,24 +32,22 @@ const NoteListProvider = (props) => {
 
   const handleUpdateId = (id) => {
     setUpdateId(id)
-    setUpdateItem((noteLists.filter((data: data) => data.id == updateId)))
+    setUpdateItem(noteLists.filter((data: data) => data.id == id))
   }
-  
-  const handleUpdateNote = (values) => { 
+
+  const handleUpdateNote = (values) => {
     let noteLists = JSON.parse(localStorage.getItem('list')) || []
     noteLists.forEach((note) => {
       if (note.id === updateId) {
-        for (let key in note){
-          if(values[key] != null) {
+        for (let key in note) {
+          if (values[key] != null) {
             note[key] = values[key]
-         }
+          }
         }
       }
     })
     localStorage.setItem('list', JSON.stringify(noteLists))
   }
-
-  
 
   const handelDeleteNote = (id) => {
     let notes = JSON.parse(localStorage.getItem('list'))
