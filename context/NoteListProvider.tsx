@@ -4,6 +4,7 @@ import { getListFromLocal } from '../helperFunctions/getListFromLocal'
 interface NoteListContext {
   noteLists: {}[]
   updateId: number
+  updateItem: {}[]
   handleCreateNewNote?: () => void
   handleUpdateNote?: ( values?: object) => void
   handleUpdateId?: (id: number) => void
@@ -12,7 +13,8 @@ interface NoteListContext {
 
 const defaultState = {
   noteLists: [],
-  updateId: null
+  updateId: null,
+  updateItem:  []
 }
 
 export const noteListContext = createContext<NoteListContext>(defaultState)
@@ -20,10 +22,13 @@ export const noteListContext = createContext<NoteListContext>(defaultState)
 const NoteListProvider = (props) => {
   const [noteLists, setNoteLists] = useState()
   const [updateId, setUpdateId] = useState()
+  const [updateItem, setUpdateItem] = useState()
 
-  useEffect(() => {
+  useEffect(() => 
     setNoteLists(getListFromLocal())
-  }, [])
+  , [])
+
+
 
   const handleCreateNewNote = () => {
     setNoteLists(getListFromLocal())
@@ -31,6 +36,7 @@ const NoteListProvider = (props) => {
 
   const handleUpdateId = (id) => {
     setUpdateId(id)
+    setUpdateItem((noteLists.filter((data: data) => data.id == updateId)))
   }
   
   const handleUpdateNote = (values) => { 
@@ -47,6 +53,8 @@ const NoteListProvider = (props) => {
     localStorage.setItem('list', JSON.stringify(noteLists))
   }
 
+  
+
   const handelDeleteNote = (id) => {
     let notes = JSON.parse(localStorage.getItem('list'))
     notes != null && (notes = notes.filter((note) => note.id !== id))
@@ -59,6 +67,7 @@ const NoteListProvider = (props) => {
       value={{
         noteLists,
         updateId,
+        updateItem,
         handleCreateNewNote,
         handleUpdateNote,
         handleUpdateId,

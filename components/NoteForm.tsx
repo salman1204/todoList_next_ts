@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { AiOutlineClose } from 'react-icons/ai'
 import Modal from 'react-modal'
@@ -32,14 +32,14 @@ const customStyles = {
     width: '774px',
     height: '620px',
     border: 'none',
-    boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
+    boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
   },
 }
 
 const NoteForm = ({ type }: FormProps) => {
-  const { handleModalOpener, handleUpdateModalOpener } =
-    useContext(modalContext)
-  const { handleCreateNewNote, handleUpdateNote } = useContext(noteListContext)
+  const { handleModalOpener, handleUpdateModalOpener } = useContext(modalContext)
+  const { updateItem, handleCreateNewNote, handleUpdateNote } = useContext(noteListContext)
+
 
   let currentDate = currentDataFinder()
 
@@ -80,76 +80,77 @@ const NoteForm = ({ type }: FormProps) => {
 
   return (
     <>
-      <Modal
-        isOpen={true}
-        onRequestClose={
-          type == 'create' ? handleModalOpener : handleUpdateModalOpener
-        }
-        style={customStyles}
-      >
-        <div className=" d-flex row align-items-center justify-content-center m-0 p-3">
-          <div className="d-flex justify-content-between mb-5 pt-3">
-            <span></span>
-            {type == 'create' ? (
-              <span>New Note</span>
-            ) : (
-              <span>Update Note</span>
-            )}
-            <AiOutlineClose
-              onClick={
-                type == 'create' ? handleModalOpener : handleUpdateModalOpener
-              }
-              style={{ cursor: 'pointer' }}
-            />
-          </div>
-
-          <Form
-            onSubmit={type == 'create' ? handleCreateNote : handleaUpdateNote}
-          >
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Note Title</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                name="title"
-                onChange={handleForm}
+        <Modal
+          isOpen={true}
+          onRequestClose={
+            type == 'create' ? handleModalOpener : handleUpdateModalOpener
+          }
+          style={customStyles}
+        >
+          <div className=" d-flex row align-items-center justify-content-center m-0 p-3">
+            <div className="d-flex justify-content-between mb-5 pt-3">
+              <span></span>
+              {type == 'create' ? (
+                <span>New Note</span>
+              ) : (
+                <span>Update Note</span>
+              )}
+              <AiOutlineClose
+                onClick={
+                  type == 'create' ? handleModalOpener : handleUpdateModalOpener
+                }
+                style={{ cursor: 'pointer' }}
               />
-            </Form.Group>
-
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Note Details</Form.Label>
-              <Form.Control
-                required
-                as="textarea"
-                name="description"
-                rows={3}
-                onChange={handleForm}
-                style={{ minHeight: '200px' }}
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check
-                type="checkbox"
-                label="Make this note star"
-                name="hasStar"
-                checked={hasStar}
-                onChange={() => {
-                  values.hasStar = !hasStar
-                }}
-              />
-            </Form.Group>
-            <div className="d-flex justify-content-between py-3">
-              <ColorPicker handleForm={handleForm} />
-              <Button variant="dark" type="submit" className="px-5">
-                {type == 'create' ? <span>Save</span> : <span>Update</span>}
-              </Button>
             </div>
-          </Form>
-        </div>
-      </Modal>
+
+            <Form
+              onSubmit={type == 'create' ? handleCreateNote : handleaUpdateNote}
+            >
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>Note Title</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="title"
+                  defaultValue={type == 'create' ? '' : "update"}
+                  onChange={handleForm}
+                />
+              </Form.Group>
+
+              <Form.Group
+                className="mb-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
+                <Form.Label>Note Details</Form.Label>
+                <Form.Control
+                  required
+                  as="textarea"
+                  name="description"
+                  rows={3}
+                  onChange={handleForm}
+                  style={{ minHeight: '200px' }}
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check
+                  type="checkbox"
+                  label="Make this note star"
+                  name="hasStar"
+                  checked={hasStar}
+                  onChange={() => {
+                    values.hasStar = !hasStar
+                  }}
+                />
+              </Form.Group>
+              <div className="d-flex justify-content-between py-3">
+                <ColorPicker handleForm={handleForm} />
+                <Button variant="dark" type="submit" className="px-5">
+                  {type == 'create' ? <span>Save</span> : <span>Update</span>}
+                </Button>
+              </div>
+            </Form>
+          </div>
+        </Modal>
     </>
   )
 }
