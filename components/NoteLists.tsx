@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react'
-import { Col, Form, FormControl, Row } from 'react-bootstrap'
+import { Row } from 'react-bootstrap'
+import { RiSearchLine } from 'react-icons/ri'
 import { noteListContext } from '../context/NoteListProvider'
 import { starContext } from '../context/StarListProvider'
 import NoteItem from './NoteItem'
-
 type data = {
   title: string
   hasStar: boolean
@@ -12,14 +12,14 @@ type data = {
 const NoteLists = () => {
   const { star } = useContext(starContext)
   const [searchText, setSearchText] = useState<string>('')
-  const {noteLists} = useContext(noteListContext)
-  
+  const { noteLists } = useContext(noteListContext)
+
   useEffect(() => {
     !localStorage.getItem('list') &&
       localStorage.setItem('list', JSON.stringify([]))
   }, [])
-  
-  let todoList = noteLists;
+
+  let todoList = noteLists
 
   let filterList = []
 
@@ -38,16 +38,22 @@ const NoteLists = () => {
 
   return (
     <div className="p-5 border-start min-vh-100">
-      <Row className="d-flex justify-content-center mb-4">
-        <Form className="w-75">
-          <FormControl
-            placeholder="Search with title"
+      <Row>
+        <div
+          className="d-flex justify-content-center search__bar__div"
+        >
+          <input
+            className="search__bar w-100 d-inline-block ps-5 pb-3"
             type="text"
             onChange={(e) => setSearchText(e.target.value)}
+            placeholder="Search"
           />
-        </Form>
+          <i className="ms-3">
+            <RiSearchLine size={20} color={"#9E9E9E"}/>
+          </i>
+        </div>
       </Row>
-      <Row>
+      <Row className="mt-5 ms-3">
         {star ? (
           <h1 style={{ color: '#FECD03' }}>Star Notes</h1>
         ) : (
@@ -55,14 +61,12 @@ const NoteLists = () => {
         )}
       </Row>
       <Row>
-        <Col>
-          <div className="d-flex flex-wrap justify-content-start">
-            {NoteLists != null &&
-              NoteLists.map((item) => (
-                <NoteItem key={Math.floor(Math.random() * 1000)} item={item} />
-              ))}
-          </div>
-        </Col>
+        <div className="d-flex flex-wrap justify-content-start">
+          {NoteLists != null &&
+            NoteLists.map((item) => (
+              <NoteItem key={Math.floor(Math.random() * 1000)} item={item} />
+            ))}
+        </div>
       </Row>
     </div>
   )

@@ -13,8 +13,8 @@
 
 .todo__card__main {
   border-radius: 10px;
-  width: 380px;
-  min-height: 286px;
+  width: 480px;
+  min-height: 350px;
 }
 
  /* Radio Color button */
@@ -76,4 +76,25 @@
   margin-right: -50%;
   transform: translate(-50%, -50%);
   border-radius: 5%
+}
+
+/* search bar */
+
+.search__bar {
+  border: none;
+  border-bottom: 1px solid #E8E9ED;
+}
+
+.search__bar:focus {
+  outline: none;
+  border-bottom: 1px solid #2F2A2F;
+  transition:all .4s ease-in-out
+} 
+
+.search__bar__div {
+  position:relative;
+}
+.search__bar__div i {
+  position:absolute;
+  left: 0;
 }

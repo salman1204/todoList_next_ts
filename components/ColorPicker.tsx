@@ -20,6 +20,7 @@ const ColorPicker = ({ handleForm }: handleForm) => {
             style={{ backgroundColor: `${color}` }}
           >
             <input
+              required
               type="radio"
               name="color"
               value={color}
